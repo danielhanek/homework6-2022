@@ -11,7 +11,6 @@ window.addEventListener("load", function() {
  document.querySelector("#play").addEventListener("click", function() {
  	console.log("Play Video");
 	 video.play()
-	 console.log("The current volume is " + video.volume*100 + "%")
 	 document.querySelector("#volume").innerHTML = video.volume *100+"%"
 	
 });
@@ -23,13 +22,11 @@ document.querySelector("#pause").addEventListener("click", function() {
 
 
 document.querySelector("#slower").addEventListener("click", function() {
-	console.log("Current speed is " + video.playbackRate)
 	video.playbackRate = video.playbackRate * .95
 	console.log("New speed is " + video.playbackRate)
 });
 
 document.querySelector("#faster").addEventListener("click", function() {
-	console.log("Current speed is " + video.playbackRate)
 	video.playbackRate = video.playbackRate / .95
 	console.log("New speed is " + video.playbackRate)
 });
@@ -38,9 +35,11 @@ document.querySelector("#mute").addEventListener("click", function() {
 	console.log("The value of mute is " + video.muted)
 	if (video.muted === false) {    
 		video.muted = true;
+		document.querySelector("#mute").innerHTML = "Unmute"
 	}
 	else {
 		video.muted = false;
+		document.querySelector("#mute").innerHTML = "Mute"
 	}
 	
 });
@@ -68,10 +67,12 @@ document.querySelector("#slider").addEventListener("change",function(){
 });
 
 document.querySelector("#skip").addEventListener("click",function(){
-	console.log("Current time of video is " + video.currentTime +"sec")
+	console.log("Original location ", video.currentTime)
+	console.log("New location " + video.currentTime +"sec")
 	video.currentTime = video.currentTime + 15;
 
 	video.addEventListener('ended', function() {
 		video.currentTime = 0;
+		video.play();
 	}
 )});
